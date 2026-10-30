@@ -1,0 +1,41 @@
+{'registry_set': 15000, 'process_creation': 3243, 'file_event': 15000, 'ps_script': 111}
+excluded for low coverage (<75% of rules): {'mistralai/mistral-large-4-1t-a52b': 6}
+
+Why valid rules missed the attack:
+ miss_reason
+wrong detection logic                   75
+field not present in this log source     2
+                                       rules  valid_pct  detects_pct  noisy_pct  usable_pct  median_benign_hits  attack_technique_pct  attack_technique_parent_pct  attack_tactic_pct
+model                                                                                                                                                                                
+SigmaHQ (human)                           60      100.0        100.0        0.0       100.0                 0.0                 100.0                        100.0              100.0
+nvidia/nemotron-3-ultra-550b-a55b         60       81.7         55.0        0.0        55.0                 0.0                  66.1                         75.0               80.0
+meta/muse-glimmer-30b                     60       91.7         43.3        1.7        41.7                 0.0                  44.6                         58.9               73.3
+openai/gpt-oss-20b                        60       38.3         18.3        0.0        18.3                 0.0                  33.9                         50.0               50.0
+nvidia/nemotron-3.5-lightning-30b-a3b     58       51.7         17.2        0.0        17.2                 0.0                   9.3                         22.2               27.6
+
+By log source (all models):
+                   valid  detects  usable
+category                                
+file_event         60.9     30.4    30.4
+process_creation   66.7     31.9    31.9
+ps_script          56.8     31.8    29.5
+registry_set       77.8     44.4    44.4
+
+Failure reasons:
+ model                                                    
+meta/muse-glimmer-30b                  invented modifier      3.0
+                                       invalid                2.0
+                                       no YAML rule found     NaN
+                                       runtime                NaN
+nvidia/nemotron-3-ultra-550b-a55b      invented modifier      9.0
+                                       invalid                NaN
+                                       no YAML rule found     1.0
+                                       runtime                1.0
+nvidia/nemotron-3.5-lightning-30b-a3b  invented modifier      4.0
+                                       invalid               18.0
+                                       no YAML rule found     6.0
+                                       runtime                NaN
+openai/gpt-oss-20b                     invented modifier     28.0
+                                       invalid                8.0
+                                       no YAML rule found     1.0
+                                       runtime                NaN
